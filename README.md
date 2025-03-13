@@ -4,7 +4,7 @@
 - 💞️ I’m looking to collaborate on not much for now.
 - 📫 How to reach me is not yet possible.
 - 😄 Pronouns: he, his
-- ⚡ Fun fact: i can't code :) i use chatgpt.
+- ⚡ Fun fact: i can't code very well :) i use chatgpt.
 - ❤️ I also love making ai!
 <!---
 Fitsneezy/Fitsneezy is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
