@@ -2,7 +2,7 @@
 - 👀 I’m interested in ChatGPT, ai, sonic the hedgehog, rom hacks, unity, and a lot of other stuff i probably forgot. Oh yeah i also like triscuts.
 - 🌱 I’m currently learning unity.
 - 💞️ I’m looking to collaborate on not much for now.
-- 📫 How to reach me is not yet possible.
+- 📫 How to reach shoot me an email at rankest.redux-8w@icloud.com!
 - 😄 Pronouns: he, his
 - ⚡ Fun fact: i can't code very well :) i use chatgpt.
 - ❤️ I also love making ai!
