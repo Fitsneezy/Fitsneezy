@@ -54,6 +54,18 @@ window.addEventListener('keydown', e => {
 window.addEventListener('keyup', e => {
   keys[e.key.toLowerCase()] = false;
 });
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawPlayer();  // ← this is the animated player with walk/jump/stand
+  }
+
+    function loop() {
+    update();   // updates player position, velocity, etc.
+    draw();     // draws tiles + player
+    requestAnimationFrame(loop);  // keeps the game running
+  }
+
+loop(); // 👈 Don't forget to call this once!
 
 // --- Levels ---
 const levels = [
