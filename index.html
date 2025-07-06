@@ -19,14 +19,6 @@
       background: #aaa;
       margin: 30px 0;
     }
-    .not-editable-table {
-      font-family: monospace;
-      background: #f0f0f0;
-      padding: 10px;
-      border: 1px solid #999;
-      white-space: pre;
-      overflow-x: auto;
-    }
     a {
       color: #0055cc;
     }
@@ -36,45 +28,113 @@
 <body>
     
   <header>
-    <h1>Fitsneezy543</h1>
-    <p>Username: <strong>Fitsneezy</strong></p>
+    <h1>Fitsneezy543: <strong>Home</strong></h1>
   </header>
 
   <section>
     <h2>Mini Sonic Mini (Flash-style dumpster fire)</h2>
-    <canvas id="game" width="320" height="240" style="background: #000;"></canvas>
+    <canvas id="game" width="480" height="360" style="background: #000;"></canvas>
     <script>
       // BASIC BAD GAME LOOP JUST FOR FUN (don't expect quality)
-      const canvas = document.getElementById("game");
-      const ctx = canvas.getContext("2d");
-      let x = 10, y = 180, vx = 0, grounded = true;
+      // --- Fullscreen toggle ---
+window.addEventListener('keydown', e => {
+  if(e.key.toLowerCase() === 'f') {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
+    } else {
+      document.exitFullscreen();
+    }
+  }
+});
 
-      document.addEventListener("keydown", e => {
-        if (e.key === "ArrowRight") vx = 2;
-        if (e.key === "ArrowLeft") vx = -2;
-        if (e.key === " " && grounded) {
-          y -= 40;
-          grounded = false;
-        }
-      });
+// --- Controls including WASD ---
+const keys = {};
+window.addEventListener('keydown', e => {
+  keys[e.key.toLowerCase()] = true;
+});
+window.addEventListener('keyup', e => {
+  keys[e.key.toLowerCase()] = false;
+});
 
-      function loop() {
-        ctx.fillStyle = "black";
-        ctx.fillRect(0, 0, 320, 240);
-        ctx.fillStyle = "blue";
-        ctx.beginPath();
-        ctx.arc(x, y, 10, 0, Math.PI * 2);
-        ctx.fill();
-        x += vx;
-        vx *= 0.9; // Friction
-        if (!grounded) y += 2;
-        if (y >= 180) {
-          y = 180;
-          grounded = true;
-        }
-        requestAnimationFrame(loop);
-      }
-      loop();
+// --- Levels ---
+const levels = [
+  [0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1], // level 0
+  [0,1,1,0,0,1,1,1,0,0,1,1,0,1,1,0,1,1,0,0], // level 1 (example)
+  // Add more level arrays here
+];
+let currentLevel = 0;
+let map = levels[currentLevel];
+
+const tileSize = 48;
+let cameraX = 0;
+
+// Reset player on level change
+function loadLevel(level) {
+  currentLevel = Math.max(0, Math.min(levels.length - 1, level));
+  map = levels[currentLevel];
+  player.x = 0;
+  player.y = canvas.height - tileSize - player.height;
+  player.vx = 0;
+  player.vy = 0;
+  player.grounded = false;
+  cameraX = 0;
+}
+
+// Change level with N and P keys
+window.addEventListener('keydown', e => {
+  if(e.key.toLowerCase() === 'n') {
+    loadLevel(currentLevel + 1);
+  }
+  if(e.key.toLowerCase() === 'p') {
+    loadLevel(currentLevel - 1);
+  }
+});
+
+// --- Update function with WASD and arrows ---
+function update() {
+  // Movement input: arrows or WASD
+  if(keys['arrowright'] || keys['d']) {
+    player.vx = player.speed;
+    facingLeft = false;
+  } else if(keys['arrowleft'] || keys['a']) {
+    player.vx = -player.speed;
+    facingLeft = true;
+  } else {
+    player.vx = 0;
+  }
+
+  // Jump: space or W or Up arrow
+  if((keys[' '] || keys['w'] || keys['arrowup']) && player.grounded) {
+    player.vy = -10;
+    player.grounded = false;
+  }
+
+  // Physics and collision (same as before)
+  player.vy += player.gravity;
+  player.x += player.vx;
+  player.y += player.vy;
+
+  if(player.y + player.height > canvas.height - tileSize) {
+    player.y = canvas.height - tileSize - player.height;
+    player.vy = 0;
+    player.grounded = true;
+  }
+
+  // Camera follow
+  cameraX = player.x - canvas.width / 2 + player.width / 2;
+  if(cameraX < 0) cameraX = 0;
+  if(cameraX > (map.length * tileSize) - canvas.width) cameraX = (map.length * tileSize) - canvas.width;
+
+  // Update player state
+  if(!player.grounded) {
+    playerState = 'jump';
+  } else if(player.vx !== 0) {
+    playerState = 'walk';
+  } else {
+    playerState = 'stand';
+  }
+}
+
     </script>
     <p><em>He do be spinning, kinda.</em></p>
   </section>
