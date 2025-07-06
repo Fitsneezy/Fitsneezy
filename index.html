@@ -1,77 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fitsneezy - Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>Fitsneezy543</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #e0f7ff;
+      color: #111;
+      padding: 20px;
+    }
+    header {
+      background: #00aaff;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+    }
+    section {
+      margin-top: 20px;
+    }
+    hr {
+      border: none;
+      height: 2px;
+      background: #aaa;
+      margin: 30px 0;
+    }
+    .not-editable-table {
+      font-family: monospace;
+      background: #f0f0f0;
+      padding: 10px;
+      border: 1px solid #999;
+      white-space: pre;
+      overflow-x: auto;
+    }
+    a {
+      color: #0055cc;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="your-logo.png" alt="Fitsneezy Logo">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#skills">Skills</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
     
-    <section class="hero">
-        <div class="container">
-            <h1>Welcome to Fitsneezy's Portfolio</h1>
-            <p>Unity Developer | Gamer | Creator of Sonic Hacks and Not That Great GT</p>
-            <a href="#projects" class="btn">Explore My Projects</a>
-        </div>
-    </section>
+  <header>
+    <h1>Fitsneezy543</h1>
+    <p>Username: <strong>Fitsneezy</strong></p>
+  </header>
 
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>Hi, I'm Fitsneezy. I specialize in Unity development, Sonic hacks, and creating unique projects like NTG GPT. I’m passionate about coding, gaming, creating innovative solutions, and doing infinite bljs.</p>
-        </div>
-    </section>
+  <section>
+    <h2>Mini Sonic Mini (Flash-style dumpster fire)</h2>
+    <canvas id="game" width="320" height="240" style="background: #000;"></canvas>
+    <script>
+      // BASIC BAD GAME LOOP JUST FOR FUN (don't expect quality)
+      const canvas = document.getElementById("game");
+      const ctx = canvas.getContext("2d");
+      let x = 10, y = 180, vx = 0, grounded = true;
 
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2>Projects</h2>
-            <div class="project">
-                <h3>NTGGPT Version 2</h3>
-                <p>A chatbot with improved performance and features.</p>
-                <a href="https://github.com/Fitsneezy/Not-That-Great-GPT" class="btn">View on GitHub</a>
-            </div>
-            <div class="project">
-                <h3>Sonic Workshop</h3>
-                <p>A visual Sonic game maker for fans to create their own Sonic levels.</p>
-                <a href="https://github.com/Fitsneezy/SonicWorkshop" class="btn">View on GitHub</a>
-            </div>
-            <!-- Add more projects as needed -->
-        </div>
-    </section>
+      document.addEventListener("keydown", e => {
+        if (e.key === "ArrowRight") vx = 2;
+        if (e.key === "ArrowLeft") vx = -2;
+        if (e.key === " " && grounded) {
+          y -= 40;
+          grounded = false;
+        }
+      });
 
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2>Skills</h2>
-            <ul>
-                <li>Unity Development</li>
-                <li>UFL</li>
-                <li>GarageBand</li>
-                <li>Being stupid.</li>
-                <!-- Add more skills as needed -->
-            </ul>
-        </div>
-    </section>
+      function loop() {
+        ctx.fillStyle = "black";
+        ctx.fillRect(0, 0, 320, 240);
+        ctx.fillStyle = "blue";
+        ctx.beginPath();
+        ctx.arc(x, y, 10, 0, Math.PI * 2);
+        ctx.fill();
+        x += vx;
+        vx *= 0.9; // Friction
+        if (!grounded) y += 2;
+        if (y >= 180) {
+          y = 180;
+          grounded = true;
+        }
+        requestAnimationFrame(loop);
+      }
+      loop();
+    </script>
+    <p><em>He do be spinning, kinda.</em></p>
+  </section>
 
+  <hr>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 Fitsneezy. All rights reserved.</p>
-        </div>
-    </footer>
+  <section>
+    <div class="not-editable-table">
+{
+    "I LOVE SERNIC HADGEHORG (Sonic The Hedgehog)",
+    "Ok, for real now, i can code in VC++ console a little",
+    "I've tried (and mostly failed) to make an AI model",
+}
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h2>Useful Links</h2>
+    <ul>
+      <li><a href="https://github.com/Fitsneezy" target="_blank">Fitsneezy543 on GitHub</a></li>
+      <li><a href="https://forums.sonicretro.org/members/fitsneezy543.48881/" target="_blank">Fitsneezy543 on Sonic Retro</a></li>
+      <li><a href="https://tcrf.net/User:Fitsneezy543" target="_blank">Fitsneezy543 on TCRF</a></li>
+      <li><a href="https://github.com/Fitsneezy" target="_blank">Fitsneezy543 on GitHub</a></li>
+      <li><a href="https://vimm.net/bbs/?p=viewProfile&User=Fitsneezy543" target="_blank">Fitsneezy543 on Vimm's Lair (BBS)</a></li>
+    </ul>
+  </section>
 </body>
 </html>
